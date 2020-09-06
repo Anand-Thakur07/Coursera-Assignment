@@ -1,0 +1,102 @@
+//Program to sort a linear linked list of 100 integers 
+#include<stdio.h> 
+#include<stdlib.h> 
+
+/*Anand Thakur
+  06.09.2020,8:00pm*/
+
+typedef struct node{int data; struct node *next;} node;   
+
+/* Function to insert a node at the beginning of a linked list */
+void beginning_insert(node **start_ref, int data) 
+{ 
+     node *ptr1 = (node*)malloc(sizeof(node)); 
+     ptr1->data = data; 
+     ptr1->next = *start_ref; 
+     *start_ref = ptr1; 
+} 
+
+/*Function to swap data of two nodes a and b*/
+void swap(node *a,node *b) 
+{ 
+    int temp = a->data; 
+    a->data = b->data; 
+    b->data = temp; 
+} 
+
+/* Function to bubble sort the given linked list */
+void bubbleSort(node *start) 
+{ 
+    int swapped, i; 
+    node *ptr1; 
+    node *lptr = NULL; 
+    if (start == NULL) 
+	return; 
+    do
+    { 
+	swapped = 0; 
+	ptr1 = start; 
+        while (ptr1->next != lptr) 
+	{ 
+            if (ptr1->data > ptr1->next->data) 
+	    { 
+		 swap(ptr1, ptr1->next); 
+		 swapped = 1; 
+            } 
+            ptr1 = ptr1->next; 
+	} 
+        lptr = ptr1; 
+     }while (swapped); 
+} 
+
+/* Function to print nodes in a given linked list */
+void printList(node *start) 
+{ 
+     int i,j;
+     node *temp = start; 
+     printf("\n"); 
+     while (temp!=NULL) 
+     {   
+	 for(i=0;i<20;i++)
+	 { 
+	    for(j=0;j<5;j++)
+            {
+                  printf("%d\t", temp->data); 
+		  temp = temp->next; 
+            }
+	    printf("\n");
+         }
+     } 
+} 
+
+int main() 
+{ 
+     int list_size, i; 
+     node *start = NULL;
+     int arr[100],j;
+     for(j=0;j<100;j++)
+     arr[j]=(rand())%500; 
+     for (i = 0; i< 100; i++) 
+           beginning_insert(&start, arr[i]); 
+        
+     /* print list before sorting */
+     printf("\nLinked list before sorting:");
+     printList(start); 
+
+     /* sort the linked list */
+     bubbleSort(start);                             
+
+     /* print list after sorting */      
+     printf("\nLinked list after sorting:");        
+     printList(start); 
+     getchar(); 
+     return 0; 
+} 
+
+
+
+
+
+
+
+
